@@ -312,6 +312,65 @@
     </div>
   </div>
 </section>
+	
+<section id="skills">
+	<p>&nbsp;</p>
+<ul>
+<li><strong> One to two paragraphs, summarize the work that you have completed so far. (This should be easy if you have been maintaining this information on your project page.)</strong></li>
+</ul>
+<p>&nbsp;</p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Research and the Starter Code</span></li>
+</ol>
+<p><span style="font-weight: 400;">After doing many researches on collision detection algorithm, we choose the V-Collide algorithm designed in </span><a href="http://gamma.cs.unc.edu/V-COLLIDE/"><span style="font-weight: 400;">http://gamma.cs.unc.edu/V-COLLIDE/</span></a><span style="font-weight: 400;"> to be the base of our sequential collision detection algorithm, and build the kinetic motion part on it. We configed and ran the start code on customized simple cases such as boxes and circles meeting each other halfway.</span></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Cuda Environment Configuration</span></li>
+</ol>
+<p><span style="font-weight: 400;">The start code is built to be a library instead of executable files. To migrate the starter code to Cuda, we simplified the packaging issue by linking the collision detection method directly to the testing cases.</span></p>
+<p>&nbsp;</p>
+<ul>
+<li><strong> Describe how you are doing with respect to the goals and deliverables stated in your proposal. Do you still believe you will be able to produce all your deliverables? If not, why? What about the &rdquo;nice to haves&rdquo;? In your milestone writeup we want a new list of goals that you plan to hit for the poster session.</strong></li>
+</ul>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">Progress</span></p>
+<p><span style="font-weight: 400;">We can now run the serialized version to ensure the functionality of collision detection. The Cuda algorithm is implemented by inheriting the sequential method. The integration has been tested to be successful.</span></p>
+<p><span style="font-weight: 400;">Schedule</span></p>
+<p><span style="font-weight: 400;">We are on the track as we expected at the beginning.&nbsp;</span></p>
+<p><span style="font-weight: 400;">Because the collision detection code is very long and has a lot of dependencies, it took us a while to figure out the logic and reorganize the code to run in parallel. Currently we have a runnable version of code (in serial), and are still trying our best to ensure the correctness of our cuda collision detection code. We spent longer than expected time on migrating the sequential code to Cuda because of the unexpected complexity of code. However, we hope that we can catch up during Thanksgiving time. We still believe that we can finish our goals on time. For now, we decide to stick to the original plan, with the schedule slightly revised.</span></p>
+<p><br /><br /></p>
+<p><strong>Revised Schedule</strong></p>
+<p>&nbsp;</p>
+<p><strong>Hao</strong></p>
+<p><strong>11.22-11.24</strong><span style="font-weight: 400;"> - Finish parallelized code in Cuda for n-body collision parts.</span></p>
+<p><strong>11.25-11.28</strong><span style="font-weight: 400;"> - </span> <span style="font-weight: 400;">Propose and implement methods to parallelize over the OBB tree of the collision detection algorithm.</span></p>
+<p><strong>11.28-12.1 - </strong><span style="font-weight: 400;">Finish parallelized code for simple cases such as 2 boxes</span></p>
+<p><strong>12.2-12.5 -&nbsp; </strong><span style="font-weight: 400;">Generalize the code for complex cases</span></p>
+<p><strong>12.6-12.9 - </strong><span style="font-weight: 400;">Wrap up and write final report&nbsp;</span></p>
+<p>&nbsp;</p>
+<p><strong>Tianxiang</strong></p>
+<p><strong>11.22-11.28</strong><span style="font-weight: 400;"> - Finish parallelized code in Cuda for n-body collision parts.</span></p>
+<p><strong>11.29-12.1 - </strong> <span style="font-weight: 400;">Integrate performance checking and correctness validation scripts.</span></p>
+<p><strong>12.2-12.5 -</strong> <span style="font-weight: 400;">Integrate OpenGL rendering functionality for the demo videos.</span></p>
+<p><strong>12.6-12.9 -</strong> <span style="font-weight: 400;">Wrap up and write final report</span></p>
+<p><br /><br /></p>
+<ul>
+<li><strong> What do you plan to show at the poster session? Will it be a demo? Will it be a graph?</strong></li>
+</ul>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">We plan to use a demo of videos displaying the animation of collided objects.&nbsp;</span></p>
+<p><span style="font-weight: 400;">We hope to pay more attention to the parallelism algorithm itself instead of on the demonstration tools. Thus, even though an interactively-runnable demo may be more impressive and descriptive, we decide to use static videos to convey the ideas.</span></p>
+<p><br /><br /></p>
+<ul>
+<li><strong> List the issues that concern you the most. Are there any remaining unknowns (things you simply don&rsquo;t know how to solve, or resource you don&rsquo;t know how to get) or is it just a 4 matter of coding and doing the work? If you do not wish to put this information on a public web site you are welcome to email the staff directly.</strong></li>
+</ul>
+<p>&nbsp;</p>
+<p><span style="font-weight: 400;">For now, we are still trying to resolve the dependency of methods. There are two major pain-points:</span></p>
+<ol>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Data Structure: The starter code uses linked-lists and other customized data structures to represent intermediate results and the final outputs. This is mainly designed for the flexibility of appending newly detected collided objects. This, however, generates a lot of trouble for the data transition between the host and device memory space.</span></li>
+<li style="font-weight: 400;"><span style="font-weight: 400;">Hierarchical Implementation: The starter code encapsulates the core collision detection function inside an unwriteable function. Although the major part that we want to parallelize is the core detection function, directly invoking it will cause device functions to call host functions, which is prohibited in Cuda.</span></li>
+</ol>
+<p>&nbsp;</p>
+</section>
 
 
 <!--/.page-section-->
